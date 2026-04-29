@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import DashboardMockup from '../components/DashboardMockup'
+import HeroShowcase from '../components/HeroShowcase'
 
 export default function Hero() {
   return (
@@ -23,7 +23,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center pt-24">
         {/* Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -86,14 +86,14 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {/* Animated dashboard mockup */}
+        {/* Animated showcase: dashboard with auto-clicking cursor + phone */}
         <motion.div
           className="mt-16 sm:mt-20"
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
         >
-          <DashboardMockup />
+          <HeroShowcase />
         </motion.div>
       </div>
     </section>
