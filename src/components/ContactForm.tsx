@@ -1,28 +1,56 @@
 import { motion } from 'framer-motion'
 import { useState, type FormEvent } from 'react'
-import { Send, CheckCircle2 } from 'lucide-react'
+import { Send, CheckCircle2, AlertCircle } from 'lucide-react'
 import { useT } from '../i18n/LanguageContext'
 
 const SUPPORT_EMAIL = 'contact@carrevio.com'
+// Formsubmit.co relays form submissions to SUPPORT_EMAIL with no backend
+// required. The first POST sends a one-time activation email to that
+// address — confirm it once and all subsequent submissions land in the
+// inbox directly. Swap this URL for a real endpoint when the backend
+// /contact route is live.
+const ENDPOINT = `https://formsubmit.co/ajax/${SUPPORT_EMAIL}`
 
-// No backend yet — submitting opens the user's email client with the message
-// pre-filled. Easy to swap for a real endpoint later: replace handleSubmit.
+type Status = 'idle' | 'sending' | 'sent' | 'error'
+
 export default function ContactForm() {
   const { t } = useT()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<Status>('idle')
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    const subject = encodeURIComponent(`CarRevio website — ${name || 'contact'}`)
-    const body = encodeURIComponent(
-      `${name}${email ? ` <${email}>` : ''}\n\n${message}`,
-    )
-    window.location.href = `mailto:${SUPPORT_EMAIL}?subject=${subject}&body=${body}`
-    setSent(true)
+    setStatus('sending')
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `CarRevio website — ${name}`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || data.success === 'false') throw new Error('submit failed')
+      setStatus('sent')
+      setName('')
+      setEmail('')
+      setMessage('')
+    } catch {
+      setStatus('error')
+    }
   }
+
+  const sending = status === 'sending'
 
   return (
     <motion.div
@@ -44,40 +72,46 @@ export default function ContactForm() {
           <input
             type="text"
             required
+            disabled={sending}
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={t('contact.name')}
-            className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-accent/60 focus:bg-white/[0.05] transition-colors"
+            className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-accent/60 focus:bg-white/[0.05] transition-colors disabled:opacity-50"
           />
           <input
             type="email"
             required
+            disabled={sending}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder={t('contact.email')}
-            className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-accent/60 focus:bg-white/[0.05] transition-colors"
+            className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-accent/60 focus:bg-white/[0.05] transition-colors disabled:opacity-50"
           />
         </div>
         <textarea
           required
+          disabled={sending}
           rows={6}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder={t('contact.message')}
-          className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-accent/60 focus:bg-white/[0.05] transition-colors resize-y"
+          className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-accent/60 focus:bg-white/[0.05] transition-colors resize-y disabled:opacity-50"
         />
         <button
           type="submit"
-          className="group w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-accent hover:bg-accent-dark text-white font-semibold text-base transition-all hover:shadow-lg hover:shadow-accent/25"
+          disabled={sending}
+          className="group w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-accent hover:bg-accent-dark text-white font-semibold text-base transition-all hover:shadow-lg hover:shadow-accent/25 disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          {t('contact.send')}
-          <Send
-            size={16}
-            className="group-hover:translate-x-0.5 transition-transform"
-          />
+          {sending ? t('contact.sending') : t('contact.send')}
+          {!sending && (
+            <Send
+              size={16}
+              className="group-hover:translate-x-0.5 transition-transform"
+            />
+          )}
         </button>
 
-        {sent && (
+        {status === 'sent' && (
           <motion.div
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -85,6 +119,17 @@ export default function ContactForm() {
           >
             <CheckCircle2 size={16} />
             <span>{t('contact.success')}</span>
+          </motion.div>
+        )}
+
+        {status === 'error' && (
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center gap-2 text-sm text-rose-300 bg-rose-500/10 border border-rose-500/20 rounded-xl px-4 py-3"
+          >
+            <AlertCircle size={16} />
+            <span>{t('contact.error')}</span>
           </motion.div>
         )}
       </form>
