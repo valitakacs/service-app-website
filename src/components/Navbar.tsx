@@ -12,6 +12,7 @@ export default function Navbar() {
   }, [])
 
   const links = [
+    { label: 'Home', href: '#home' },
     { label: 'Features', href: '#features' },
     { label: 'For Shops', href: '#for-shops' },
     { label: 'For Customers', href: '#for-customers' },
