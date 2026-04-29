@@ -9,6 +9,7 @@ import {
   Clock,
   Tag,
 } from 'lucide-react'
+import MobileMockup from '../components/MobileMockup'
 
 const mobileFeatures = [
   {
@@ -98,7 +99,7 @@ export default function ForCustomers() {
             </div>
           </motion.div>
 
-          {/* Right: phone mockup */}
+          {/* Right: animated phone mockup */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -106,98 +107,7 @@ export default function ForCustomers() {
             transition={{ duration: 0.7 }}
             className="order-1 lg:order-2 flex justify-center"
           >
-            <div className="relative">
-              <div className="absolute -inset-8 bg-accent/[0.03] rounded-full blur-3xl" />
-              {/* Phone frame */}
-              <div className="relative w-[280px] rounded-[2.5rem] border-[3px] border-zinc-800 bg-black shadow-2xl shadow-black/80 overflow-hidden">
-                {/* Notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-b-2xl z-10 border-b-[3px] border-x-[3px] border-zinc-800" />
-                {/* Screen content */}
-                <div className="pt-10 pb-6 px-5">
-                  {/* Header */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div>
-                      <div className="text-[10px] text-zinc-600">Welcome back</div>
-                      <div className="text-white text-sm font-semibold">Alex M.</div>
-                    </div>
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent to-accent-dark" />
-                  </div>
-
-                  {/* Quick actions */}
-                  <div className="grid grid-cols-2 gap-2 mb-5">
-                    {[
-                      { label: 'Book Service', icon: '📅' },
-                      { label: 'My Garage', icon: '🚗' },
-                      { label: 'History', icon: '📋' },
-                      { label: 'Estimates', icon: '💰' },
-                    ].map((a) => (
-                      <div
-                        key={a.label}
-                        className="bg-zinc-900 rounded-xl p-3 text-center border border-white/5"
-                      >
-                        <div className="text-lg mb-1">{a.icon}</div>
-                        <div className="text-[10px] text-zinc-500">{a.label}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Upcoming */}
-                  <div className="text-xs text-white font-semibold mb-2">
-                    Upcoming
-                  </div>
-                  <div className="bg-zinc-900 rounded-xl p-3 border border-white/5 mb-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] font-medium text-white">
-                        Full Service
-                      </span>
-                      <span className="text-[9px] px-2 py-0.5 bg-accent/10 text-accent rounded-full">
-                        Confirmed
-                      </span>
-                    </div>
-                    <div className="text-[10px] text-zinc-600">
-                      Tomorrow, 10:00 AM
-                    </div>
-                    <div className="text-[10px] text-zinc-600">BMW 320d - B 123 ABC</div>
-                  </div>
-
-                  {/* Work order status */}
-                  <div className="text-xs text-white font-semibold mb-2">
-                    Active Work Order
-                  </div>
-                  <div className="bg-zinc-900 rounded-xl p-3 border border-white/5">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] font-medium text-white">
-                        Brake Replacement
-                      </span>
-                      <span className="text-[9px] px-2 py-0.5 bg-accent/10 text-accent rounded-full">
-                        In Progress
-                      </span>
-                    </div>
-                    {/* Progress bar */}
-                    <div className="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-                      <div className="w-3/5 h-full bg-gradient-to-r from-accent to-accent-light rounded-full" />
-                    </div>
-                    <div className="flex justify-between mt-1.5">
-                      <span className="text-[9px] text-zinc-600">Step 3 of 5</span>
-                      <span className="text-[9px] text-accent">View Details</span>
-                    </div>
-                  </div>
-                </div>
-                {/* Bottom bar */}
-                <div className="flex justify-around py-3 border-t border-white/5">
-                  {['Home', 'Garage', 'Service', 'Account'].map((tab, i) => (
-                    <div
-                      key={tab}
-                      className={`text-[9px] ${
-                        i === 0 ? 'text-accent' : 'text-zinc-700'
-                      }`}
-                    >
-                      {tab}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <MobileMockup />
           </motion.div>
         </div>
       </div>
