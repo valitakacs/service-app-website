@@ -200,6 +200,18 @@ export const TRANSLATIONS = {
       'Alătură-te noii generații de service-uri auto. Vezi Car Revio în acțiune. Demo gratuit de 30 de minute cu echipa noastră, adaptat nevoilor service-ului tău.',
     'cta.demo': 'Programează demo gratuit',
     'cta.contact': 'Vorbește cu noi',
+    'contact.title': 'Trimite-ne un mesaj',
+    'contact.subtitle':
+      'Ai o întrebare? Scrie-ne și îți răspundem în maxim 24 de ore.',
+    'contact.name': 'Nume',
+    'contact.email': 'Email',
+    'contact.message': 'Mesaj',
+    'contact.send': 'Trimite mesaj',
+    'contact.sending': 'Se trimite...',
+    'contact.success':
+      'Mesaj trimis. Îți vom răspunde în cel mai scurt timp.',
+    'contact.error':
+      'Nu am putut deschide aplicația de email. Scrie-ne direct la contact@carrevio.com.',
 
     // ── Footer ───────────────────────────────────────────────────────────
     'footer.tagline':
@@ -489,6 +501,17 @@ export const TRANSLATIONS = {
       "Join the next generation of auto repair shops. See Car Revio in action. Free 30-minute demo with our team, tailored to your shop's needs.",
     'cta.demo': 'Get a Free Demo',
     'cta.contact': 'Talk to Us',
+    'contact.title': 'Send us a message',
+    'contact.subtitle':
+      "Have a question? Drop us a line and we'll get back within 24 hours.",
+    'contact.name': 'Name',
+    'contact.email': 'Email',
+    'contact.message': 'Message',
+    'contact.send': 'Send Message',
+    'contact.sending': 'Sending...',
+    'contact.success': "Message sent. We'll get back to you shortly.",
+    'contact.error':
+      'We could not open your email client. Reach us directly at contact@carrevio.com.',
 
     // ── Footer ───────────────────────────────────────────────────────────
     'footer.tagline':
