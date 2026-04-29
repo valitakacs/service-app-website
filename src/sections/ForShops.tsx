@@ -6,6 +6,8 @@ import {
   Users,
   MessageCircle,
   Settings,
+  Megaphone,
+  BarChart3,
 } from 'lucide-react'
 
 const dashboardFeatures = [
@@ -38,6 +40,16 @@ const dashboardFeatures = [
     icon: Settings,
     title: 'Shop Configuration',
     desc: 'Set business hours, manage service catalog with pricing, configure multiple locations.',
+  },
+  {
+    icon: Megaphone,
+    title: 'Customer Retention & Marketing',
+    desc: "Create promotional campaigns and send them straight to your customers' phones. Automate reminders for ITP, service intervals, and seasonal needs. Turn one-time customers into recurring revenue.",
+  },
+  {
+    icon: BarChart3,
+    title: 'Business Analytics',
+    desc: 'Track appointments, revenue, customer retention, and team productivity with real-time dashboards. Identify growth opportunities backed by data.',
   },
 ]
 
@@ -159,13 +171,16 @@ export default function ForShops() {
               For Shop Owners
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Your entire operation,
+              One dashboard.
               <br />
-              one dashboard
+              Your service operation,
+              <br />
+              fully under control.
             </h2>
             <p className="text-zinc-500 mb-8">
               The web dashboard gives your team complete control over daily
-              operations. Designed for speed and clarity.
+              operations — in real time. Multi-role access, designed for speed,
+              connection, and clarity.
             </p>
 
             <div className="grid gap-4">

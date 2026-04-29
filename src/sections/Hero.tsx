@@ -36,27 +36,27 @@ export default function Hero() {
         </motion.div>
 
         <motion.h1
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight mb-6"
+          className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          The Future of
+          The complete digital solution
           <br />
-          <span className="text-accent">
-            Auto Service
-          </span>{' '}
-          is Here
+          for a modern{' '}
+          <span className="text-accent">auto repair shop.</span>
         </motion.h1>
 
         <motion.p
-          className="text-lg sm:text-xl text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-lg sm:text-xl text-zinc-500 max-w-3xl mx-auto mb-10 leading-relaxed"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          One platform to manage your entire auto service shop. From appointments
-          and work orders to real-time customer communication — all in one place.
+          One platform to manage your entire auto repair shop — from appointments
+          and work orders to real-time customer communication, retention campaigns,
+          and growth analytics. All connected to a mobile app your customers can
+          access via a simple QR code.
         </motion.p>
 
         <motion.div
@@ -69,17 +69,17 @@ export default function Hero() {
             href="#cta"
             className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-accent hover:bg-accent-dark text-white font-semibold text-lg transition-all hover:shadow-2xl hover:shadow-accent/25"
           >
-            Start Free Trial
+            Get a Demo
             <ArrowRight
               size={18}
               className="group-hover:translate-x-1 transition-transform"
             />
           </a>
           <a
-            href="#features"
+            href="#how-it-works"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/10 hover:border-accent/50 text-white font-medium text-lg transition-all hover:bg-accent/5"
           >
-            See Features
+            See How It Works
           </a>
         </motion.div>
 

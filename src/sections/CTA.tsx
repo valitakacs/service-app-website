@@ -25,18 +25,21 @@ export default function CTA() {
               className="w-32 h-32 mx-auto mb-6 brightness-0 invert"
             />
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Ready to modernize your shop?
+              Ready to run a fully digital shop?
             </h2>
-            <p className="text-zinc-500 text-lg max-w-xl mx-auto mb-8">
-              Join the next generation of auto service shops. Start your free trial
-              today — no credit card required.
+            <p className="text-zinc-500 text-lg max-w-2xl mx-auto mb-8">
+              Join the next generation of auto repair shops. See Car Revio in
+              action. Free 30-minute demo with our team, tailored to your shop's
+              needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="mailto:contact@carrevio.com"
+                href="https://cal.com/carrevio/demo"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-accent hover:bg-accent-dark text-white font-semibold text-lg transition-all hover:shadow-2xl hover:shadow-accent/25"
               >
-                Get Started
+                Get a Free Demo
                 <ArrowRight
                   size={18}
                   className="group-hover:translate-x-1 transition-transform"
@@ -46,7 +49,7 @@ export default function CTA() {
                 href="mailto:contact@carrevio.com"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/10 hover:border-accent/50 text-white font-medium text-lg transition-all hover:bg-accent/5"
               >
-                Contact Sales
+                Talk to Us
               </a>
             </div>
           </div>

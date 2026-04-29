@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar'
 import Hero from './sections/Hero'
+import WhyCarRevio from './sections/WhyCarRevio'
 import Features from './sections/Features'
 import ForShops from './sections/ForShops'
 import ForCustomers from './sections/ForCustomers'
@@ -12,6 +13,7 @@ function App() {
     <div className="min-h-screen">
       <Navbar />
       <Hero />
+      <WhyCarRevio />
       <Features />
       <ForShops />
       <ForCustomers />

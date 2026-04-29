@@ -91,15 +91,15 @@ export default function Features() {
           transition={{ duration: 0.6 }}
         >
           <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-3">
-            Features
+            Modern. Transparent. Connected.
           </p>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             Everything you need to run
-            <br />a modern auto service shop
+            <br />a modern auto repair shop
           </h2>
           <p className="text-zinc-500 text-lg max-w-2xl mx-auto">
             A complete platform for shop owners and their customers. Built for
-            efficiency, designed for clarity.
+            efficiency, designed for transparency, made for growth.
           </p>
         </motion.div>
 

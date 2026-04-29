@@ -40,11 +40,14 @@ export default function HowItWorks() {
             How It Works
           </p>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Up and running in minutes
+            Onboarded by us.
+            <br />
+            Run fully digital in days.
           </h2>
-          <p className="text-zinc-500 text-lg max-w-xl mx-auto">
-            Getting started with CarRevio is simple. Four steps to transform how
-            you run your shop.
+          <p className="text-zinc-500 text-lg max-w-2xl mx-auto">
+            Four simple steps to leave the old way behind — WhatsApp, paper notes,
+            lost calls, and Excel sheets — and run your shop fully digital.
+            Personalized onboarding & support guaranteed.
           </p>
         </motion.div>
 

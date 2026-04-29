@@ -6,6 +6,8 @@ import {
   FileCheck,
   MessageCircle,
   Star,
+  Clock,
+  Tag,
 } from 'lucide-react'
 
 const mobileFeatures = [
@@ -39,6 +41,16 @@ const mobileFeatures = [
     title: 'Rate & Review',
     desc: 'Share your experience after each service. Help the shop improve and help others choose.',
   },
+  {
+    icon: Clock,
+    title: 'Smart Reminders',
+    desc: "Get notified when it's time for ITP, oil change, or seasonal service. Your car never misses a beat — and you never get a surprise expense.",
+  },
+  {
+    icon: Tag,
+    title: 'Exclusive Offers from Your Shop',
+    desc: "Get exclusive deals from your shop — seasonal promotions, loyalty rewards, and discounts you won't find anywhere else. The best for your car at the best price.",
+  },
 ]
 
 export default function ForCustomers() {
@@ -60,13 +72,15 @@ export default function ForCustomers() {
               For Customers
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Your car, your phone,
+              Your car, one tap away.
               <br />
-              full control
+              Full control. Real-time transparency.
             </h2>
             <p className="text-zinc-500 mb-8">
-              The mobile app puts customers in the loop at every step. Book, track,
-              communicate, and pay — all from their pocket.
+              Connected to your auto-repair shop, the mobile app keeps customers
+              in the loop at every step — bookings, estimates, status updates,
+              chat with the shop. Every vehicle gets a digital Car Passport: full
+              service history, exportable PDF, perfect for resale.
             </p>
 
             <div className="grid gap-4">
