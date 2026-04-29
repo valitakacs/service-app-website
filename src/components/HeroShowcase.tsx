@@ -446,10 +446,10 @@ export default function HeroShowcase() {
       <motion.div
         animate={{ y: [0, -8, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-        className="relative shrink-0 origin-center scale-[0.6] -my-28"
+        className="relative shrink-0 origin-center scale-[0.7] -my-12"
         style={{
           transform:
-            'perspective(900px) rotateY(-8deg) rotateX(2deg) scale(0.6)',
+            'perspective(900px) rotateY(-8deg) rotateX(2deg) scale(0.7)',
         }}
       >
         <div className="absolute -inset-12 bg-gradient-to-br from-accent/15 via-accent/5 to-transparent rounded-full blur-3xl pointer-events-none" />

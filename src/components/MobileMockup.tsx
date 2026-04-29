@@ -102,7 +102,7 @@ export default function MobileMockup() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#080A10] to-[#050A0F] pointer-events-none" />
         <div className="absolute top-20 left-1/2 -translate-x-1/2 w-64 h-64 bg-accent/[0.08] rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative pt-9 pb-2 min-h-[640px]">
+        <div className="relative pt-9 pb-2">
           {/* Status bar */}
           <div className="flex items-center justify-between px-6 mb-4 text-[10px] text-white/80">
             <span className="font-semibold">9:41</span>
@@ -114,7 +114,7 @@ export default function MobileMockup() {
           </div>
 
           {/* Header */}
-          <div className="px-5 mb-5">
+          <div className="px-5 mb-4">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3 min-w-0">
                 <div className="relative w-11 h-11 rounded-full shrink-0 overflow-hidden border border-white/10">
@@ -183,7 +183,7 @@ export default function MobileMockup() {
           </div>
 
           {/* Quick actions */}
-          <div className="px-4 mb-5">
+          <div className="px-4 mb-3">
             <div className="grid grid-cols-4 gap-2">
               {QUICK_ACTIONS.map(({ icon: Icon, key }) => (
                 <div
