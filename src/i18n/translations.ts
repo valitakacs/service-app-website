@@ -201,7 +201,7 @@ export const TRANSLATIONS = {
       'Alătură-te noii generații de service-uri auto. Vezi Car Revio în acțiune. Demo gratuit de 30 de minute cu echipa noastră, adaptat nevoilor service-ului tău.',
     'cta.demo': 'Programează demo gratuit',
     'cta.contact': 'Vorbește cu noi',
-    'contact.page.title': 'Hai să vorbim',
+    'contact.page.title': 'Contactează-ne',
     'contact.page.subtitle':
       'Ai o întrebare? Scrie-ne, iar echipa noastră îți răspunde în maxim 24 de ore. Asigură-te că incluzi cât mai multe detalii.',
     'contact.title': 'Trimite-ne un mesaj',
