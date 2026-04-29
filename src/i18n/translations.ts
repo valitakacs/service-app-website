@@ -215,7 +215,8 @@ export const TRANSLATIONS = {
     'contact.success':
       'Mesaj trimis. Îți vom răspunde în cel mai scurt timp.',
     'contact.error':
-      'Nu am putut deschide aplicația de email. Scrie-ne direct la contact@carrevio.com.',
+      'Mesajul nu a putut fi trimis. Încearcă din nou sau scrie-ne direct la contact@carrevio.com.',
+    'contact.notRobot': 'Nu sunt robot',
     'contact.cta': 'Contactează-ne',
 
     // ── FAQ ──────────────────────────────────────────────────────────────
@@ -551,7 +552,8 @@ export const TRANSLATIONS = {
     'contact.sending': 'Sending...',
     'contact.success': "Message sent. We'll get back to you shortly.",
     'contact.error':
-      'We could not open your email client. Reach us directly at contact@carrevio.com.',
+      'Your message could not be sent. Please try again or reach us directly at contact@carrevio.com.',
+    'contact.notRobot': "I'm not a robot",
     'contact.cta': 'Contact us',
 
     // ── FAQ ──────────────────────────────────────────────────────────────

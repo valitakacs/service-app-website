@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState, type FormEvent } from 'react'
-import { Send, CheckCircle2, AlertCircle } from 'lucide-react'
+import { Send, CheckCircle2, AlertCircle, Check } from 'lucide-react'
 import { useT } from '../i18n/LanguageContext'
 
 const SUPPORT_EMAIL = 'contact@carrevio.com'
@@ -18,10 +18,15 @@ export default function ContactForm() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+  const [notRobot, setNotRobot] = useState(false)
+  // Honeypot: bots auto-fill any text input they find. Real users never
+  // touch this hidden field, so any submission with a value is dropped.
+  const [trap, setTrap] = useState('')
   const [status, setStatus] = useState<Status>('idle')
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
+    if (!notRobot || trap) return
     setStatus('sending')
     try {
       const res = await fetch(ENDPOINT, {
@@ -37,6 +42,7 @@ export default function ContactForm() {
           _subject: `CarRevio website — ${name}`,
           _template: 'table',
           _captcha: 'false',
+          _honey: trap,
         }),
       })
       const data = await res.json().catch(() => ({}))
@@ -45,12 +51,14 @@ export default function ContactForm() {
       setName('')
       setEmail('')
       setMessage('')
+      setNotRobot(false)
     } catch {
       setStatus('error')
     }
   }
 
   const sending = status === 'sending'
+  const canSubmit = notRobot && !sending
 
   return (
     <motion.div
@@ -97,10 +105,43 @@ export default function ContactForm() {
           placeholder={t('contact.message')}
           className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder:text-zinc-600 text-sm focus:outline-none focus:border-accent/60 focus:bg-white/[0.05] transition-colors resize-y disabled:opacity-50"
         />
+
+        {/* Honeypot — hidden from users, autofilled by bots */}
+        <input
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={trap}
+          onChange={(e) => setTrap(e.target.value)}
+          className="absolute left-[-9999px] top-[-9999px] opacity-0 pointer-events-none"
+          aria-hidden="true"
+        />
+
+        {/* "I'm not a robot" checkbox — required to enable submission */}
+        <label className="flex items-center gap-3 cursor-pointer select-none w-fit">
+          <span
+            className={`relative w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+              notRobot
+                ? 'bg-accent border-accent'
+                : 'bg-white/[0.03] border-white/20 hover:border-white/40'
+            }`}
+          >
+            <input
+              type="checkbox"
+              checked={notRobot}
+              onChange={(e) => setNotRobot(e.target.checked)}
+              disabled={sending}
+              className="sr-only"
+            />
+            {notRobot && <Check size={14} className="text-white" />}
+          </span>
+          <span className="text-sm text-zinc-400">{t('contact.notRobot')}</span>
+        </label>
+
         <button
           type="submit"
-          disabled={sending}
-          className="group w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-accent hover:bg-accent-dark text-white font-semibold text-base transition-all hover:shadow-lg hover:shadow-accent/25 disabled:opacity-70 disabled:cursor-not-allowed"
+          disabled={!canSubmit}
+          className="group w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-accent hover:bg-accent-dark text-white font-semibold text-base transition-all hover:shadow-lg hover:shadow-accent/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
         >
           {sending ? t('contact.sending') : t('contact.send')}
           {!sending && (
