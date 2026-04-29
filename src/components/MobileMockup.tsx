@@ -1,77 +1,45 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useState } from 'react'
 import {
   Calendar,
   Wrench,
   FileText,
   Bell,
   Car,
-  CarFront,
   MessageCircle,
   Home,
   User,
-  CheckCircle2,
-  ChevronRight,
+  Zap,
 } from 'lucide-react'
+import { useT, timeAwareGreetingKey } from '../i18n/LanguageContext'
+import type { TranslationKey } from '../i18n/translations'
+import CarIllustration from './CarIllustration'
 
-// Mirrors the real CarRevio mobile app: dark navy bg, glass cards with
-// primary blue accent stripe, fictive plate (XX 00 ABC), no real names.
-// Cycles through 3 home-screen states to simulate live navigation.
+// Fictive data — never use real plates / years to avoid implying a customer.
+const FICTIVE_PLATE = 'XX 00 ABC'
+const FICTIVE_YEAR = 2025
 
-type Status = 'În așteptare' | 'Confirmată' | 'Reprogramată'
-
-interface Frame {
-  reminderTitle: string
-  reminderDate: string
-  reminderTime: string
-  reminderStatus: Status
-  workOrderStep: number
-  notification?: string
-}
-
-const FRAMES: Frame[] = [
-  {
-    reminderTitle: 'Schimb ulei + filtru',
-    reminderDate: 'Mâine, Mar 30',
-    reminderTime: '09:30 — 10:30',
-    reminderStatus: 'În așteptare',
-    workOrderStep: 0,
-  },
-  {
-    reminderTitle: 'Schimb ulei + filtru',
-    reminderDate: 'Astăzi, Mar 30',
-    reminderTime: '09:30 — 10:30',
-    reminderStatus: 'Confirmată',
-    workOrderStep: 2,
-    notification: 'Programarea ta a fost confirmată',
-  },
-  {
-    reminderTitle: 'Plăcuțe frână + discuri',
-    reminderDate: 'Astăzi, Mar 30',
-    reminderTime: '14:00 — 15:30',
-    reminderStatus: 'Reprogramată',
-    workOrderStep: 3,
-    notification: 'Mecanicul lucrează la mașina ta',
-  },
+// Quick-action buttons under the vehicle card. Icon + i18n label key.
+const QUICK_ACTIONS: { icon: typeof Calendar; key: TranslationKey }[] = [
+  { icon: Calendar, key: 'mobile.actions.book' },
+  { icon: Car, key: 'mobile.actions.garage' },
+  { icon: FileText, key: 'mobile.actions.estimates' },
+  { icon: MessageCircle, key: 'mobile.actions.chat' },
 ]
 
-const STATUS_STYLE: Record<Status, string> = {
-  'În așteptare': 'bg-amber-500/15 text-amber-400 border border-amber-500/30',
-  'Confirmată': 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30',
-  'Reprogramată': 'bg-accent/15 text-accent border border-accent/30',
-}
-
-const STEPS = ['Primit', 'Inspecție', 'În lucru', 'Finalizat']
+// Bottom tab bar. `Home` tab is the active one in the mockup.
+const BOTTOM_TABS: {
+  icon: typeof Home
+  key: TranslationKey
+  active?: boolean
+}[] = [
+  { icon: Home, key: 'mobile.tab.home', active: true },
+  { icon: Car, key: 'mobile.tab.garage' },
+  { icon: Wrench, key: 'mobile.tab.service' },
+  { icon: User, key: 'mobile.tab.account' },
+]
 
 export default function MobileMockup() {
-  const [idx, setIdx] = useState(0)
-
-  useEffect(() => {
-    const id = setInterval(() => setIdx((i) => (i + 1) % FRAMES.length), 3200)
-    return () => clearInterval(id)
-  }, [])
-
-  const f = FRAMES[idx]
+  const { t } = useT()
+  const greeting = t(timeAwareGreetingKey())
 
   return (
     <div className="relative">
@@ -100,10 +68,9 @@ export default function MobileMockup() {
           </div>
 
           {/* Header — matches mobile HomeHeader: greeting + brand label + avatar + bell */}
-          <div className="px-5 mb-4">
+          <div className="px-5 mb-5">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3 min-w-0">
-                {/* Avatar — gradient circle like in mobile */}
                 <div className="relative w-11 h-11 rounded-full shrink-0 overflow-hidden border border-white/10">
                   <div className="absolute inset-0 bg-gradient-to-br from-accent to-accent-dark" />
                   <div className="absolute inset-0 flex items-center justify-center text-[12px] font-bold text-white tracking-tight">
@@ -112,13 +79,13 @@ export default function MobileMockup() {
                 </div>
                 <div className="min-w-0">
                   <div className="text-[11px] text-white/50 leading-tight">
-                    Bună dimineața
+                    {greeting}
                   </div>
                   <div className="text-white text-[15px] font-bold tracking-tight leading-tight truncate">
-                    Bun venit!
+                    {t('mobile.welcome')}
                   </div>
                   <div className="text-[8.5px] text-white/35 font-medium tracking-[1.5px] uppercase mt-0.5">
-                    CarRevio Premium
+                    {t('mobile.brand')}
                   </div>
                 </div>
               </div>
@@ -126,211 +93,59 @@ export default function MobileMockup() {
                 <div className="w-9 h-9 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center">
                   <Bell size={14} className="text-white/70" />
                 </div>
-                <AnimatePresence>
-                  {f.notification && (
-                    <motion.span
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                      className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-accent rounded-full border-2 border-[#050a0f]"
-                    />
-                  )}
-                </AnimatePresence>
+                <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-accent rounded-full border-2 border-[#050a0f]" />
               </div>
             </div>
           </div>
 
-          {/* Notification toast */}
-          <div className="px-4 mb-3 h-9">
-            <AnimatePresence>
-              {f.notification && (
-                <motion.div
-                  key={f.notification}
-                  initial={{ opacity: 0, y: -8, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -6, scale: 0.97 }}
-                  transition={{ duration: 0.4 }}
-                  className="flex items-center gap-2 bg-white/[0.04] border border-white/10 backdrop-blur-md rounded-2xl px-3 py-2"
-                >
-                  <div className="w-6 h-6 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center">
-                    <Bell size={11} className="text-accent" />
-                  </div>
-                  <span className="text-[10.5px] text-white/90 leading-tight flex-1">
-                    {f.notification}
-                  </span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          {/* Vehicle card — centerpiece. Full-bleed futuristic car image with
+              a glass info strip overlaid at the bottom (label + plate). */}
+          <div className="px-4 mb-5">
+            <div className="relative rounded-[1.4rem] overflow-hidden border border-white/[0.08] shadow-[0_18px_50px_-18px_rgba(59,130,246,0.45)]">
+              <div className="aspect-[16/11] w-full relative">
+                <CarIllustration className="absolute inset-0 w-full h-full" />
 
-          {/* Service reminder card — glassmorphism with left accent border */}
-          <div className="px-4 mb-4">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={f.reminderTitle + f.reminderStatus}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.4 }}
-                className="relative rounded-2xl overflow-hidden border border-white/[0.08] bg-gradient-to-br from-white/[0.05] to-white/[0.01] backdrop-blur-xl"
-              >
-                {/* Left accent border */}
-                <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-accent" />
-                <div className="p-3.5 pl-4 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
-                    <Calendar size={16} className="text-accent" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-[12px] text-white font-semibold truncate">
-                      {f.reminderTitle}
-                    </div>
-                    <div className="text-[10px] text-white/40 mt-0.5">
-                      {f.reminderDate} · {f.reminderTime}
-                    </div>
-                  </div>
-                  <span
-                    className={`text-[9px] px-2 py-0.5 rounded-full whitespace-nowrap ${
-                      STATUS_STYLE[f.reminderStatus]
-                    }`}
-                  >
-                    {f.reminderStatus}
+                {/* Top-right fuel-type badge */}
+                <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/55 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1">
+                  <Zap size={10} className="text-accent" />
+                  <span className="text-[9px] font-semibold text-white/90 tracking-wide">
+                    {t('mobile.fuelType.electric')}
                   </span>
                 </div>
-              </motion.div>
-            </AnimatePresence>
+
+                {/* Bottom gradient for legibility of overlaid info strip */}
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/85 via-black/45 to-transparent" />
+
+                {/* Info strip */}
+                <div className="absolute inset-x-0 bottom-0 p-3.5 flex items-end justify-between gap-3">
+                  <div className="min-w-0">
+                    <div className="text-[9px] uppercase tracking-[1.5px] text-white/50 font-semibold">
+                      {FICTIVE_YEAR}
+                    </div>
+                    <div className="text-white text-[15px] font-bold tracking-tight leading-tight truncate">
+                      {t('mobile.myCar')}
+                    </div>
+                  </div>
+                  <span className="font-mono font-bold text-[10px] text-white bg-white/10 border border-white/20 backdrop-blur-md px-2 py-1 rounded-md tracking-[2px] shrink-0">
+                    {FICTIVE_PLATE}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Quick actions row */}
-          <div className="px-4 mb-4">
+          <div className="px-4 mb-5">
             <div className="grid grid-cols-4 gap-2">
-              {[
-                { icon: Calendar, label: 'Programare' },
-                { icon: Car, label: 'Garaj' },
-                { icon: FileText, label: 'Devize' },
-                { icon: MessageCircle, label: 'Chat' },
-              ].map((a) => (
+              {QUICK_ACTIONS.map(({ icon: Icon, key }) => (
                 <div
-                  key={a.label}
-                  className="bg-white/[0.03] border border-white/[0.06] rounded-xl py-2 flex flex-col items-center gap-1"
+                  key={key}
+                  className="bg-white/[0.03] border border-white/[0.06] rounded-xl py-2.5 flex flex-col items-center gap-1"
                 >
-                  <a.icon size={15} className="text-accent" />
-                  <span className="text-[8.5px] text-white/60">{a.label}</span>
+                  <Icon size={15} className="text-accent" />
+                  <span className="text-[8.5px] text-white/60">{t(key)}</span>
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* Section title */}
-          <div className="px-5 mb-2 flex items-center justify-between">
-            <span className="text-[10px] font-bold text-white/40 uppercase tracking-wider">
-              Comandă activă
-            </span>
-            <span className="text-[10px] text-accent flex items-center gap-0.5">
-              vezi tot <ChevronRight size={11} />
-            </span>
-          </div>
-
-          {/* Work order glass card with vehicle photo */}
-          <div className="px-4 mb-3">
-            <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] bg-gradient-to-br from-white/[0.05] to-white/[0.01] backdrop-blur-xl p-3.5">
-              <div className="flex items-center gap-3 mb-3">
-                {/* Vehicle thumbnail — gradient + car silhouette like S3Image fallback */}
-                <div className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 border border-white/10">
-                  <div className="absolute inset-0 bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-950" />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 via-transparent to-transparent" />
-                  {/* Subtle highlight stripe */}
-                  <div className="absolute -top-2 -right-3 w-12 h-12 bg-white/5 rounded-full blur-xl" />
-                  <div className="relative w-full h-full flex items-end justify-center pb-1">
-                    <CarFront
-                      size={32}
-                      strokeWidth={1.4}
-                      className="text-white/85"
-                    />
-                  </div>
-                  {/* Tiny progress ring badge top-right */}
-                  <div className="absolute top-1 right-1">
-                    <svg className="w-4 h-4 -rotate-90" viewBox="0 0 16 16">
-                      <circle
-                        cx="8"
-                        cy="8"
-                        r="6"
-                        fill="rgba(0,0,0,0.5)"
-                        stroke="rgba(255,255,255,0.2)"
-                        strokeWidth="1.5"
-                      />
-                      <motion.circle
-                        cx="8"
-                        cy="8"
-                        r="6"
-                        fill="none"
-                        stroke="#3b82f6"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeDasharray={2 * Math.PI * 6}
-                        animate={{
-                          strokeDashoffset:
-                            2 * Math.PI * 6 *
-                            (1 - f.workOrderStep / (STEPS.length - 1)),
-                        }}
-                        transition={{ duration: 0.8, ease: 'easeOut' }}
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-[11.5px] font-semibold text-white truncate">
-                    Vehiculul tău
-                  </div>
-                  <div className="flex items-center gap-1.5 mt-0.5">
-                    <span className="text-[8.5px] font-mono font-bold text-white bg-white/10 border border-white/15 px-1.5 py-px rounded tracking-wider">
-                      XX 00 ABC
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1 mt-0.5">
-                    <Wrench size={9} className="text-accent" />
-                    <span className="text-[8.5px] text-white/60">
-                      {STEPS[f.workOrderStep]}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step pills */}
-              <div className="flex items-center justify-between gap-1">
-                {STEPS.map((s, i) => {
-                  const done = i < f.workOrderStep
-                  const current = i === f.workOrderStep
-                  return (
-                    <div key={s} className="flex flex-col items-center flex-1">
-                      <motion.div
-                        animate={{ scale: current ? [1, 1.18, 1] : 1 }}
-                        transition={{
-                          duration: 1.6,
-                          repeat: current ? Infinity : 0,
-                        }}
-                        className={`w-5 h-5 rounded-full flex items-center justify-center mb-1 ${
-                          done
-                            ? 'bg-accent'
-                            : current
-                            ? 'bg-accent/25 border border-accent'
-                            : 'bg-white/[0.04] border border-white/10'
-                        }`}
-                      >
-                        {done && (
-                          <CheckCircle2 size={10} className="text-white" />
-                        )}
-                      </motion.div>
-                      <span
-                        className={`text-[8px] ${
-                          done || current ? 'text-white/80' : 'text-white/30'
-                        }`}
-                      >
-                        {s}
-                      </span>
-                    </div>
-                  )
-                })}
-              </div>
             </div>
           </div>
         </div>
@@ -338,20 +153,15 @@ export default function MobileMockup() {
         {/* Bottom nav (blurred bottom bar) */}
         <div className="relative border-t border-white/[0.06] bg-black/40 backdrop-blur-xl">
           <div className="flex justify-around py-2.5">
-            {[
-              { icon: Home, label: 'Acasă', active: true },
-              { icon: Car, label: 'Garaj' },
-              { icon: Wrench, label: 'Service' },
-              { icon: User, label: 'Cont' },
-            ].map((tab) => (
+            {BOTTOM_TABS.map(({ icon: Icon, key, active }) => (
               <div
-                key={tab.label}
+                key={key}
                 className={`flex flex-col items-center gap-0.5 ${
-                  tab.active ? 'text-accent' : 'text-white/30'
+                  active ? 'text-accent' : 'text-white/30'
                 }`}
               >
-                <tab.icon size={16} />
-                <span className="text-[8px] font-medium">{tab.label}</span>
+                <Icon size={16} />
+                <span className="text-[8px] font-medium">{t(key)}</span>
               </div>
             ))}
           </div>
