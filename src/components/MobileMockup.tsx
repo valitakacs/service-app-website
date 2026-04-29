@@ -99,18 +99,32 @@ export default function MobileMockup() {
             </span>
           </div>
 
-          {/* Header */}
-          <div className="px-5 mb-5">
-            <div className="flex items-start justify-between mb-1">
-              <div>
-                <div className="text-[11px] text-white/50">Bună dimineața</div>
-                <div className="text-white text-[20px] font-bold tracking-tight">
-                  Acasă
+          {/* Header — matches mobile HomeHeader: greeting + brand label + avatar + bell */}
+          <div className="px-5 mb-4">
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-center gap-3 min-w-0">
+                {/* Avatar — gradient circle like in mobile */}
+                <div className="relative w-11 h-11 rounded-full shrink-0 overflow-hidden border border-white/10">
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent to-accent-dark" />
+                  <div className="absolute inset-0 flex items-center justify-center text-[12px] font-bold text-white tracking-tight">
+                    CR
+                  </div>
+                </div>
+                <div className="min-w-0">
+                  <div className="text-[11px] text-white/50 leading-tight">
+                    Bună dimineața
+                  </div>
+                  <div className="text-white text-[15px] font-bold tracking-tight leading-tight truncate">
+                    Bun venit!
+                  </div>
+                  <div className="text-[8.5px] text-white/35 font-medium tracking-[1.5px] uppercase mt-0.5">
+                    CarRevio Premium
+                  </div>
                 </div>
               </div>
-              <div className="relative">
+              <div className="relative shrink-0">
                 <div className="w-9 h-9 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center">
-                  <Bell size={15} className="text-white/70" />
+                  <Bell size={14} className="text-white/70" />
                 </div>
                 <AnimatePresence>
                   {f.notification && (
