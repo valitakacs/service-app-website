@@ -279,13 +279,12 @@ export default function MobileMockup() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-[11.5px] font-semibold text-white truncate">
-                    Renault Clio
+                    Vehiculul tău
                   </div>
                   <div className="flex items-center gap-1.5 mt-0.5">
                     <span className="text-[8.5px] font-mono font-bold text-white bg-white/10 border border-white/15 px-1.5 py-px rounded tracking-wider">
                       XX 00 ABC
                     </span>
-                    <span className="text-[9px] text-white/40">2018</span>
                   </div>
                   <div className="flex items-center gap-1 mt-0.5">
                     <Wrench size={9} className="text-accent" />
