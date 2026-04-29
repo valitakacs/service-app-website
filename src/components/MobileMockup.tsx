@@ -6,6 +6,7 @@ import {
   FileText,
   Bell,
   Car,
+  CarFront,
   MessageCircle,
   Home,
   User,
@@ -215,40 +216,51 @@ export default function MobileMockup() {
             </span>
           </div>
 
-          {/* Work order glass card with status ring */}
+          {/* Work order glass card with vehicle photo */}
           <div className="px-4 mb-3">
             <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] bg-gradient-to-br from-white/[0.05] to-white/[0.01] backdrop-blur-xl p-3.5">
               <div className="flex items-center gap-3 mb-3">
-                {/* Status ring */}
-                <div className="relative w-12 h-12 shrink-0">
-                  <svg className="w-full h-full -rotate-90" viewBox="0 0 48 48">
-                    <circle
-                      cx="24"
-                      cy="24"
-                      r="20"
-                      fill="none"
-                      stroke="rgba(255,255,255,0.06)"
-                      strokeWidth="3"
+                {/* Vehicle thumbnail — gradient + car silhouette like S3Image fallback */}
+                <div className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 border border-white/10">
+                  <div className="absolute inset-0 bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-950" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 via-transparent to-transparent" />
+                  {/* Subtle highlight stripe */}
+                  <div className="absolute -top-2 -right-3 w-12 h-12 bg-white/5 rounded-full blur-xl" />
+                  <div className="relative w-full h-full flex items-end justify-center pb-1">
+                    <CarFront
+                      size={32}
+                      strokeWidth={1.4}
+                      className="text-white/85"
                     />
-                    <motion.circle
-                      cx="24"
-                      cy="24"
-                      r="20"
-                      fill="none"
-                      stroke="#3b82f6"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeDasharray={2 * Math.PI * 20}
-                      animate={{
-                        strokeDashoffset:
-                          2 * Math.PI * 20 *
-                          (1 - f.workOrderStep / (STEPS.length - 1)),
-                      }}
-                      transition={{ duration: 0.8, ease: 'easeOut' }}
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Wrench size={14} className="text-accent" />
+                  </div>
+                  {/* Tiny progress ring badge top-right */}
+                  <div className="absolute top-1 right-1">
+                    <svg className="w-4 h-4 -rotate-90" viewBox="0 0 16 16">
+                      <circle
+                        cx="8"
+                        cy="8"
+                        r="6"
+                        fill="rgba(0,0,0,0.5)"
+                        stroke="rgba(255,255,255,0.2)"
+                        strokeWidth="1.5"
+                      />
+                      <motion.circle
+                        cx="8"
+                        cy="8"
+                        r="6"
+                        fill="none"
+                        stroke="#3b82f6"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeDasharray={2 * Math.PI * 6}
+                        animate={{
+                          strokeDashoffset:
+                            2 * Math.PI * 6 *
+                            (1 - f.workOrderStep / (STEPS.length - 1)),
+                        }}
+                        transition={{ duration: 0.8, ease: 'easeOut' }}
+                      />
+                    </svg>
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -260,6 +272,12 @@ export default function MobileMockup() {
                       XX 00 ABC
                     </span>
                     <span className="text-[9px] text-white/40">2018</span>
+                  </div>
+                  <div className="flex items-center gap-1 mt-0.5">
+                    <Wrench size={9} className="text-accent" />
+                    <span className="text-[8.5px] text-white/60">
+                      {STEPS[f.workOrderStep]}
+                    </span>
                   </div>
                 </div>
               </div>
