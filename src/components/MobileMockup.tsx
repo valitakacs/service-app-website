@@ -11,7 +11,6 @@ import {
 } from 'lucide-react'
 import { useT, timeAwareGreetingKey } from '../i18n/LanguageContext'
 import type { TranslationKey } from '../i18n/translations'
-import CarIllustration from './CarIllustration'
 
 // Fictive data — never use real plates / years to avoid implying a customer.
 const FICTIVE_PLATE = 'XX 00 ABC'
@@ -67,7 +66,7 @@ export default function MobileMockup() {
             </span>
           </div>
 
-          {/* Header — matches mobile HomeHeader: greeting + brand label + avatar + bell */}
+          {/* Header — greeting + brand title + avatar + bell */}
           <div className="px-5 mb-5">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3 min-w-0">
@@ -82,9 +81,6 @@ export default function MobileMockup() {
                     {greeting}
                   </div>
                   <div className="text-white text-[15px] font-bold tracking-tight leading-tight truncate">
-                    {t('mobile.welcome')}
-                  </div>
-                  <div className="text-[8.5px] text-white/35 font-medium tracking-[1.5px] uppercase mt-0.5">
                     {t('mobile.brand')}
                   </div>
                 </div>
@@ -98,12 +94,16 @@ export default function MobileMockup() {
             </div>
           </div>
 
-          {/* Vehicle card — centerpiece. Full-bleed futuristic car image with
-              a glass info strip overlaid at the bottom (label + plate). */}
+          {/* Vehicle card — futuristic hologram-style photo with a glass info
+              strip overlaid at the bottom. Image is set as a CSS bg so we
+              can crop it tightly without the JPEG borders. */}
           <div className="px-4 mb-5">
             <div className="relative rounded-[1.4rem] overflow-hidden border border-white/[0.08] shadow-[0_18px_50px_-18px_rgba(59,130,246,0.45)]">
-              <div className="aspect-[16/11] w-full relative">
-                <CarIllustration className="absolute inset-0 w-full h-full" />
+              <div className="aspect-[16/11] w-full relative bg-[#040810]">
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: "url('/futuristic-car.jpg')" }}
+                />
 
                 {/* Top-right fuel-type badge */}
                 <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/55 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1">

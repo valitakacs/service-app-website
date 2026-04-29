@@ -10,7 +10,6 @@ import {
   Settings as Cog,
   Plus,
   CheckCircle2,
-  MousePointer2,
 } from 'lucide-react'
 import MobileMockup from './MobileMockup'
 
@@ -328,31 +327,17 @@ const HEADERS: Record<ViewKey, string> = {
 
 export default function HeroShowcase() {
   const [stepIdx, setStepIdx] = useState(0)
-  const [clicking, setClicking] = useState(false)
   const active = DEMO_LOOP[stepIdx]
-  const activeNavIndex = NAV.findIndex((n) => n.key === active)
   const View = VIEWS[active]
 
-  // Drive the demo loop: cursor moves -> after 1s click ripple ->
-  // 1.6s later jump to next item.
+  // Auto-advance through the views — no cursor, just clean nav highlight cycle.
   useEffect(() => {
-    const click = setTimeout(() => setClicking(true), 900)
-    const reset = setTimeout(() => setClicking(false), 1500)
     const next = setTimeout(
       () => setStepIdx((s) => (s + 1) % DEMO_LOOP.length),
       2800,
     )
-    return () => {
-      clearTimeout(click)
-      clearTimeout(reset)
-      clearTimeout(next)
-    }
+    return () => clearTimeout(next)
   }, [stepIdx])
-
-  // Cursor Y position based on nav item index.
-  // Logo block ≈ 36px + top padding 10px = ~46px, then each item ~30px.
-  const cursorY = 50 + activeNavIndex * 30
-  const cursorX = 24 // Sticks to right side of icons in the sidebar
 
   return (
     <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-10">
@@ -393,51 +378,30 @@ export default function HeroShowcase() {
               {NAV.map((item) => {
                 const isActive = item.key === active
                 return (
-                  <div
+                  <motion.div
                     key={item.key}
-                    className={`flex items-center gap-2 text-[11px] py-1.5 px-2 rounded-lg mb-0.5 transition-colors ${
-                      isActive
-                        ? 'bg-accent/10 text-accent'
-                        : 'text-zinc-500'
+                    animate={{
+                      backgroundColor: isActive
+                        ? 'rgba(59,130,246,0.10)'
+                        : 'rgba(59,130,246,0)',
+                    }}
+                    transition={{ duration: 0.4 }}
+                    className={`relative flex items-center gap-2 text-[11px] py-1.5 px-2 rounded-lg mb-0.5 ${
+                      isActive ? 'text-accent' : 'text-zinc-500'
                     }`}
                   >
+                    {isActive && (
+                      <motion.span
+                        layoutId="dash-nav-indicator"
+                        className="absolute left-0 top-1.5 bottom-1.5 w-[2px] rounded-full bg-accent"
+                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                      />
+                    )}
                     <item.icon size={12} />
                     {item.label}
-                  </div>
+                  </motion.div>
                 )
               })}
-
-              {/* Animated cursor */}
-              <motion.div
-                animate={{ top: cursorY, left: cursorX }}
-                transition={{ duration: 0.8, ease: 'easeInOut' }}
-                className="absolute pointer-events-none z-20"
-                style={{ top: cursorY, left: cursorX }}
-              >
-                {/* Click ripple */}
-                <AnimatePresence>
-                  {clicking && (
-                    <motion.div
-                      initial={{ scale: 0, opacity: 0.7 }}
-                      animate={{ scale: 3, opacity: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.6, ease: 'easeOut' }}
-                      className="absolute -inset-2 rounded-full bg-accent/50"
-                    />
-                  )}
-                </AnimatePresence>
-                {/* Halo */}
-                <div className="absolute -inset-2 rounded-full bg-accent/25 blur-md" />
-                {/* Cursor */}
-                <div className="relative w-5 h-5 flex items-center justify-center">
-                  <MousePointer2
-                    size={16}
-                    strokeWidth={2.5}
-                    className="text-white drop-shadow-[0_0_4px_rgba(59,130,246,0.8)]"
-                    fill="white"
-                  />
-                </div>
-              </motion.div>
             </div>
 
             {/* Content */}
