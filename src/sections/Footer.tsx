@@ -18,7 +18,7 @@ const COMPANY_LINKS: FooterLink[] = [
   { labelKey: 'footer.linkAbout', href: '#' },
   { labelKey: 'footer.linkBlog', href: '#' },
   { labelKey: 'footer.linkCareers', href: '#' },
-  { labelKey: 'footer.linkContact', href: '#' },
+  { labelKey: 'footer.linkContact', href: '/contact' },
 ]
 
 export default function Footer() {

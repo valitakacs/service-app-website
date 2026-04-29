@@ -1,6 +1,15 @@
 import { useEffect, useState } from 'react'
 import { Menu, X, Globe } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useT } from '../i18n/LanguageContext'
+import type { TranslationKey } from '../i18n/translations'
+
+interface NavLink {
+  labelKey: TranslationKey
+  href: string
+  // External anchor links inside the home page use `/#section` so they
+  // also work when the user is on a sub-route like /contact.
+}
 
 export default function Navbar() {
   const { t, locale, setLocale } = useT()
@@ -13,12 +22,12 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const links = [
-    { label: t('nav.home'), href: '#home' },
-    { label: t('nav.features'), href: '#features' },
-    { label: t('nav.forShops'), href: '#for-shops' },
-    { label: t('nav.forCustomers'), href: '#for-customers' },
-    { label: t('nav.howItWorks'), href: '#how-it-works' },
+  const links: NavLink[] = [
+    { labelKey: 'nav.home', href: '/#home' },
+    { labelKey: 'nav.features', href: '/#features' },
+    { labelKey: 'nav.forShops', href: '/#for-shops' },
+    { labelKey: 'nav.forCustomers', href: '/#for-customers' },
+    { labelKey: 'nav.howItWorks', href: '/#how-it-works' },
   ]
 
   function LangSwitch({ className = '' }: { className?: string }) {
@@ -45,7 +54,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <img
             src="/icon-transparent.png"
             alt="CarRevio"
@@ -54,7 +63,7 @@ export default function Navbar() {
           <span className="text-white font-semibold text-xl tracking-tight">
             Car<span className="text-zinc-400">Revio</span>
           </span>
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-8">
           {links.map((l) => (
@@ -63,12 +72,18 @@ export default function Navbar() {
               href={l.href}
               className="text-sm text-zinc-500 hover:text-white transition-colors"
             >
-              {l.label}
+              {t(l.labelKey)}
             </a>
           ))}
+          <Link
+            to="/contact"
+            className="text-sm text-zinc-500 hover:text-white transition-colors"
+          >
+            {t('nav.contact')}
+          </Link>
           <LangSwitch />
           <a
-            href="#cta"
+            href="/#cta"
             className="text-sm font-medium px-5 py-2.5 rounded-full bg-accent hover:bg-accent-dark text-white transition-all hover:shadow-lg hover:shadow-accent/25"
           >
             {t('nav.getStarted')}
@@ -93,14 +108,21 @@ export default function Navbar() {
               className="block py-3 text-zinc-400 hover:text-white transition-colors"
               onClick={() => setMobileOpen(false)}
             >
-              {l.label}
+              {t(l.labelKey)}
             </a>
           ))}
+          <Link
+            to="/contact"
+            className="block py-3 text-zinc-400 hover:text-white transition-colors"
+            onClick={() => setMobileOpen(false)}
+          >
+            {t('nav.contact')}
+          </Link>
           <div className="py-3">
             <LangSwitch />
           </div>
           <a
-            href="#cta"
+            href="/#cta"
             className="block mt-3 text-center font-medium px-5 py-2.5 rounded-full bg-accent text-white"
             onClick={() => setMobileOpen(false)}
           >

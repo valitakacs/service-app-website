@@ -9,6 +9,7 @@ export const TRANSLATIONS = {
     'nav.forShops': 'Pentru Service-uri',
     'nav.forCustomers': 'Pentru Clienți',
     'nav.howItWorks': 'Cum funcționează',
+    'nav.contact': 'Contact',
     'nav.getStarted': 'Programează demo',
 
     // ── Hero ─────────────────────────────────────────────────────────────
@@ -200,6 +201,9 @@ export const TRANSLATIONS = {
       'Alătură-te noii generații de service-uri auto. Vezi Car Revio în acțiune. Demo gratuit de 30 de minute cu echipa noastră, adaptat nevoilor service-ului tău.',
     'cta.demo': 'Programează demo gratuit',
     'cta.contact': 'Vorbește cu noi',
+    'contact.page.title': 'Hai să vorbim',
+    'contact.page.subtitle':
+      'Ai o întrebare? Scrie-ne, iar echipa noastră îți răspunde în maxim 24 de ore. Asigură-te că incluzi cât mai multe detalii.',
     'contact.title': 'Trimite-ne un mesaj',
     'contact.subtitle':
       'Ai o întrebare? Scrie-ne și îți răspundem în maxim 24 de ore.',
@@ -212,6 +216,38 @@ export const TRANSLATIONS = {
       'Mesaj trimis. Îți vom răspunde în cel mai scurt timp.',
     'contact.error':
       'Nu am putut deschide aplicația de email. Scrie-ne direct la contact@carrevio.com.',
+    'contact.cta': 'Contactează-ne',
+
+    // ── FAQ ──────────────────────────────────────────────────────────────
+    'faq.title': 'Întrebări frecvente',
+    'faq.q1': 'Cum funcționează CarRevio pentru service-ul meu?',
+    'faq.a1':
+      'Te înregistrezi, îți configurezi serviciile și locațiile, iar clienții accesează aplicația printr-un cod QR. Toată activitatea curge prin dashboard: programări, comenzi de lucru, devize, chat.',
+    'faq.q2': 'Am nevoie de echipament special?',
+    'faq.a2':
+      'Nu. Tot ce ai nevoie este un browser pe dashboard și un telefon pentru clienți. Aplicația mobilă rulează pe iOS și Android.',
+    'faq.q3': 'Cât durează implementarea?',
+    'faq.a3':
+      'În câteva zile poți funcționa 100% digital. Te ajutăm cu onboarding personalizat: configurarea serviciilor, importul clienților existenți și instruirea echipei.',
+    'faq.q4': 'Există o perioadă de probă?',
+    'faq.a4':
+      'Da. Începi cu un demo gratuit de 30 de minute și apoi îți oferim acces de probă pe o perioadă convenită împreună, ca să testezi totul în condiții reale.',
+    'faq.q5': 'Cum sunt protejate datele mele?',
+    'faq.a5':
+      'Fiecare service operează în izolare completă (multi-tenant). Datele sunt criptate la rest și în tranzit, iar accesul este pe roluri (admin, recepție, mecanic).',
+    'faq.q6':
+      'Pot să folosesc CarRevio pentru mai multe locații?',
+    'faq.a6':
+      'Da. Gestionezi mai multe filiale dintr-un singur cont, fiecare cu programul, personalul și catalogul propriu de servicii.',
+    'faq.q7': 'Cum se conectează clienții mei la aplicație?',
+    'faq.a7':
+      'Le dai un cod QR (sau un link) și își creează cont în câteva secunde. Vehiculele lor și istoricul de service apar automat în garajul lor digital.',
+    'faq.q8': 'Pot personaliza serviciile și prețurile?',
+    'faq.a8':
+      'Da. Îți construiești propriul catalog de servicii cu durată, preț și descriere. Poți modifica oricând, inclusiv pentru fiecare locație.',
+    'faq.q9': 'Există suport tehnic?',
+    'faq.a9':
+      'Da. Echipa noastră îți răspunde direct prin chat și email. La nevoie, te asistăm cu apel video pentru configurări mai complexe.',
 
     // ── Footer ───────────────────────────────────────────────────────────
     'footer.tagline':
@@ -312,6 +348,7 @@ export const TRANSLATIONS = {
     'nav.forShops': 'For Shops',
     'nav.forCustomers': 'For Customers',
     'nav.howItWorks': 'How It Works',
+    'nav.contact': 'Contact',
     'nav.getStarted': 'Get a Demo',
 
     // ── Hero ─────────────────────────────────────────────────────────────
@@ -501,6 +538,9 @@ export const TRANSLATIONS = {
       "Join the next generation of auto repair shops. See Car Revio in action. Free 30-minute demo with our team, tailored to your shop's needs.",
     'cta.demo': 'Get a Free Demo',
     'cta.contact': 'Talk to Us',
+    'contact.page.title': "Let's talk",
+    'contact.page.subtitle':
+      "Have a question? Reach out and our team will get back within 24 hours. Make sure to include as much detail as you can.",
     'contact.title': 'Send us a message',
     'contact.subtitle':
       "Have a question? Drop us a line and we'll get back within 24 hours.",
@@ -512,6 +552,37 @@ export const TRANSLATIONS = {
     'contact.success': "Message sent. We'll get back to you shortly.",
     'contact.error':
       'We could not open your email client. Reach us directly at contact@carrevio.com.',
+    'contact.cta': 'Contact us',
+
+    // ── FAQ ──────────────────────────────────────────────────────────────
+    'faq.title': 'Frequently asked',
+    'faq.q1': 'How does CarRevio work for my shop?',
+    'faq.a1':
+      'You sign up, configure your services and locations, and your customers access the app via a QR code. Everything flows through the dashboard: appointments, work orders, estimates, chat.',
+    'faq.q2': 'Do I need any special equipment?',
+    'faq.a2':
+      "No. All you need is a browser for the dashboard and a phone for your customers. The mobile app runs on iOS and Android.",
+    'faq.q3': 'How long does setup take?',
+    'faq.a3':
+      'You can be running fully digital in a few days. We help with personalized onboarding: configuring services, importing existing clients, and training your team.',
+    'faq.q4': 'Is there a free trial?',
+    'faq.a4':
+      'Yes. You start with a free 30-minute demo and then we provide trial access for a period we agree on together, so you can test everything in real conditions.',
+    'faq.q5': 'How is my data protected?',
+    'faq.a5':
+      'Each shop operates in complete isolation (multi-tenant). Data is encrypted at rest and in transit, with role-based access (admin, reception, mechanic).',
+    'faq.q6': 'Can I use CarRevio for multiple locations?',
+    'faq.a6':
+      'Yes. Manage multiple branches from one account, each with its own hours, staff, and service catalog.',
+    'faq.q7': 'How do my customers connect to the app?',
+    'faq.a7':
+      'You give them a QR code (or a link) and they create an account in seconds. Their vehicles and service history appear automatically in their digital garage.',
+    'faq.q8': 'Can I customize services and pricing?',
+    'faq.a8':
+      'Yes. You build your own service catalog with duration, price, and description. You can edit anytime, including per location.',
+    'faq.q9': 'Is there technical support?',
+    'faq.a9':
+      'Yes. Our team replies directly via chat and email. When needed, we assist with a video call for more complex setups.',
 
     // ── Footer ───────────────────────────────────────────────────────────
     'footer.tagline':
