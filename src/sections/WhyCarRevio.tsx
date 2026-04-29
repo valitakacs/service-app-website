@@ -4,25 +4,21 @@ import { TrendingUp, Repeat, Timer, BarChart3 } from 'lucide-react'
 const reasons = [
   {
     icon: TrendingUp,
-    emoji: '📈',
     title: 'More Capacity',
     desc: 'Same team. More jobs. More revenue.',
   },
   {
     icon: Repeat,
-    emoji: '🔄',
     title: 'Customer Retention',
     desc: 'Customers who come back. Without you chasing them.',
   },
   {
     icon: Timer,
-    emoji: '⏱',
     title: 'Less Dead Time',
     desc: 'Cut idle time & manual operations. Multiply productive hours.',
   },
   {
     icon: BarChart3,
-    emoji: '📊',
     title: 'Data-Driven Growth',
     desc: 'Grow based on real-time number reports.',
   },
@@ -65,7 +61,9 @@ export default function WhyCarRevio() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
             >
-              <div className="text-3xl mb-4">{r.emoji}</div>
+              <div className="w-11 h-11 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center mb-4 group-hover:bg-accent/15 transition-colors">
+                <r.icon size={20} className="text-accent" />
+              </div>
               <h3 className="text-lg font-semibold text-white mb-2">{r.title}</h3>
               <p className="text-sm text-zinc-500 leading-relaxed">{r.desc}</p>
             </motion.div>
