@@ -9,6 +9,7 @@ import {
   Megaphone,
   BarChart3,
 } from 'lucide-react'
+import InteractiveDashboard from '../components/InteractiveDashboard'
 
 const dashboardFeatures = [
   {
@@ -60,104 +61,14 @@ export default function ForShops() {
 
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left: dashboard mockup */}
+          {/* Left: interactive dashboard mockup */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <div className="relative">
-              <div className="absolute -inset-4 bg-accent/[0.03] rounded-2xl blur-2xl" />
-              <div className="relative rounded-xl border border-white/10 bg-dark-card overflow-hidden shadow-2xl shadow-black/60">
-                {/* Sidebar + content */}
-                <div className="flex">
-                  {/* Sidebar */}
-                  <div className="w-48 border-r border-white/5 bg-surface p-4 hidden sm:block">
-                    <div className="flex items-center gap-2 mb-6">
-                      <img src="/icon-transparent.png" alt="" className="w-9 h-9 brightness-0 invert" />
-                      <span className="text-white text-sm font-semibold">CarRevio</span>
-                    </div>
-                    {['Appointments', 'Work Orders', 'Clients', 'Staff', 'Chat', 'Estimates', 'Settings'].map(
-                      (item, i) => (
-                        <div
-                          key={item}
-                          className={`text-xs py-2 px-3 rounded-lg mb-1 ${
-                            i === 0
-                              ? 'bg-accent/10 text-accent font-medium'
-                              : 'text-zinc-600'
-                          }`}
-                        >
-                          {item}
-                        </div>
-                      )
-                    )}
-                  </div>
-                  {/* Content */}
-                  <div className="flex-1 p-5">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-white text-sm font-semibold">Appointments</h3>
-                      <div className="flex gap-2">
-                        {['All', 'New', 'Confirmed'].map((t, i) => (
-                          <span
-                            key={t}
-                            className={`text-xs px-3 py-1 rounded-full ${
-                              i === 0
-                                ? 'bg-accent/10 text-accent'
-                                : 'bg-white/5 text-zinc-600'
-                            }`}
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    {/* Stats */}
-                    <div className="grid grid-cols-4 gap-2 mb-4">
-                      {[
-                        { label: 'Total', val: '47' },
-                        { label: 'New', val: '12' },
-                        { label: 'Confirmed', val: '28' },
-                        { label: 'Today', val: '6' },
-                      ].map((s) => (
-                        <div key={s.label} className="bg-surface rounded-lg p-2.5 text-center border border-white/5">
-                          <div className="text-white text-lg font-bold">{s.val}</div>
-                          <div className="text-[10px] text-zinc-600">{s.label}</div>
-                        </div>
-                      ))}
-                    </div>
-                    {/* Table rows */}
-                    {[
-                      { status: 'New', name: 'Oil Change', time: '10:00' },
-                      { status: 'Confirmed', name: 'Brake Inspection', time: '11:30' },
-                      { status: 'New', name: 'Full Service', time: '14:00' },
-                    ].map((row) => (
-                      <div
-                        key={row.name}
-                        className="flex items-center justify-between py-2.5 border-b border-white/5 last:border-0"
-                      >
-                        <div className="flex items-center gap-2">
-                          <div className={`w-2 h-2 rounded-full ${row.status === 'New' ? 'bg-accent' : 'bg-zinc-500'}`} />
-                          <span className="text-xs text-white">{row.name}</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <span className="text-xs text-zinc-600">{row.time}</span>
-                          <span
-                            className={`text-[10px] px-2 py-0.5 rounded-full ${
-                              row.status === 'New'
-                                ? 'bg-accent/10 text-accent'
-                                : 'bg-zinc-800 text-zinc-400'
-                            }`}
-                          >
-                            {row.status}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <InteractiveDashboard />
           </motion.div>
 
           {/* Right: feature list */}
