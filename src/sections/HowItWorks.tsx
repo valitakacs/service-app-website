@@ -1,29 +1,23 @@
 import { motion } from 'framer-motion'
+import { useT } from '../i18n/LanguageContext'
+import type { TranslationKey } from '../i18n/translations'
 
-const steps = [
-  {
-    num: '01',
-    title: 'Sign Up Your Shop',
-    desc: 'Create your account, configure your services, business hours, and locations. Add your staff and assign roles.',
-  },
-  {
-    num: '02',
-    title: 'Customers Download the App',
-    desc: 'Your customers install the CarRevio mobile app, create an account, and add their vehicles to their digital garage.',
-  },
-  {
-    num: '03',
-    title: 'Manage Everything in Real-Time',
-    desc: 'Appointments flow in, your team manages work orders, sends estimates, and communicates — all from one dashboard.',
-  },
-  {
-    num: '04',
-    title: 'Grow Your Business',
-    desc: 'Collect reviews, build your reputation, and scale with multi-location support. Your customers keep coming back.',
-  },
+interface StepDef {
+  num: string
+  titleKey: TranslationKey
+  descKey: TranslationKey
+}
+
+const STEPS: StepDef[] = [
+  { num: '01', titleKey: 'how.step1.title', descKey: 'how.step1.desc' },
+  { num: '02', titleKey: 'how.step2.title', descKey: 'how.step2.desc' },
+  { num: '03', titleKey: 'how.step3.title', descKey: 'how.step3.desc' },
+  { num: '04', titleKey: 'how.step4.title', descKey: 'how.step4.desc' },
 ]
 
 export default function HowItWorks() {
+  const { t } = useT()
+
   return (
     <section id="how-it-works" className="relative py-28 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(59,130,246,0.03)_0%,transparent_60%)]" />
@@ -37,26 +31,23 @@ export default function HowItWorks() {
           transition={{ duration: 0.6 }}
         >
           <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-3">
-            How It Works
+            {t('how.eyebrow')}
           </p>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Onboarded by us.
+            {t('how.title.line1')}
             <br />
-            Run fully digital in days.
+            {t('how.title.line2')}
           </h2>
           <p className="text-zinc-500 text-lg max-w-2xl mx-auto">
-            Four simple steps to leave the old way behind — WhatsApp, paper notes,
-            lost calls, and Excel sheets — and run your shop fully digital.
-            Personalized onboarding & support guaranteed.
+            {t('how.subtitle')}
           </p>
         </motion.div>
 
         <div className="relative">
-          {/* Vertical line */}
           <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-accent/30 via-accent/10 to-transparent hidden md:block" />
 
           <div className="space-y-12">
-            {steps.map((step, i) => (
+            {STEPS.map((step, i) => (
               <motion.div
                 key={step.num}
                 className="flex gap-8 items-start"
@@ -66,14 +57,16 @@ export default function HowItWorks() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
                 <div className="shrink-0 w-16 h-16 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center shadow-lg shadow-accent/5 relative z-10">
-                  <span className="text-accent font-bold text-lg">{step.num}</span>
+                  <span className="text-accent font-bold text-lg">
+                    {step.num}
+                  </span>
                 </div>
                 <div className="pt-2">
                   <h3 className="text-xl font-semibold text-white mb-2">
-                    {step.title}
+                    {t(step.titleKey)}
                   </h3>
                   <p className="text-zinc-500 leading-relaxed max-w-lg">
-                    {step.desc}
+                    {t(step.descKey)}
                   </p>
                 </div>
               </motion.div>

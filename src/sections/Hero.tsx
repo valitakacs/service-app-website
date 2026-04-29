@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import HeroShowcase from '../components/HeroShowcase'
+import { useT } from '../i18n/LanguageContext'
 
 export default function Hero() {
+  const { t } = useT()
+
   return (
     <section
       id="home"
@@ -24,7 +27,6 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 text-center pt-24">
-        {/* Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -44,10 +46,10 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          The complete digital solution
+          {t('hero.title.primary')}
           <br />
-          for a modern{' '}
-          <span className="text-accent">auto repair shop.</span>
+          {t('hero.title.for')}{' '}
+          <span className="text-accent">{t('hero.title.accent')}</span>
         </motion.h1>
 
         <motion.p
@@ -56,10 +58,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          One platform to manage your entire auto repair shop — from appointments
-          and work orders to real-time customer communication, retention
-          campaigns, and growth analytics. All connected to a mobile app your
-          customers can access via a simple QR code.
+          {t('hero.subtitle')}
         </motion.p>
 
         <motion.div
@@ -72,7 +71,7 @@ export default function Hero() {
             href="#cta"
             className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-accent hover:bg-accent-dark text-white font-semibold text-lg transition-all hover:shadow-2xl hover:shadow-accent/25"
           >
-            Get a Demo
+            {t('hero.cta.demo')}
             <ArrowRight
               size={18}
               className="group-hover:translate-x-1 transition-transform"
@@ -82,11 +81,10 @@ export default function Hero() {
             href="#how-it-works"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/10 hover:border-accent/50 text-white font-medium text-lg transition-all hover:bg-accent/5"
           >
-            See How It Works
+            {t('hero.cta.howItWorks')}
           </a>
         </motion.div>
 
-        {/* Animated showcase: dashboard with auto-clicking cursor + phone */}
         <motion.div
           className="mt-16 sm:mt-20"
           initial={{ opacity: 0, y: 60 }}
